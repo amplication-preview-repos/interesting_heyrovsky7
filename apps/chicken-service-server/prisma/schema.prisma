@@ -1,0 +1,58 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Sales {
+  createdAt    DateTime  @default(now())
+  customerName String?
+  id           String    @id @default(cuid())
+  item         String?
+  quantity     Int?
+  revenue      Float?
+  saleDate     DateTime?
+  updatedAt    DateTime  @updatedAt
+}
+
+model Purchases {
+  cost         Float?
+  createdAt    DateTime  @default(now())
+  id           String    @id @default(cuid())
+  item         String?
+  purchaseDate DateTime?
+  quantity     Int?
+  supplierName String?
+  updatedAt    DateTime  @updatedAt
+}
+
+model ProductionPerDay {
+  createdAt        DateTime  @default(now())
+  date             DateTime?
+  id               String    @id @default(cuid())
+  notes            String?
+  quantityProduced Int?
+  updatedAt        DateTime  @updatedAt
+}
+
+model Inventory {
+  createdAt         DateTime  @default(now())
+  id                String    @id @default(cuid())
+  item              String?
+  lastUpdated       DateTime?
+  quantityAvailable Int?
+  updatedAt         DateTime  @updatedAt
+}
+
+model Expenses {
+  amount      Float?
+  createdAt   DateTime  @default(now())
+  expenseDate DateTime?
+  expenseType String?
+  id          String    @id @default(cuid())
+  notes       String?
+  updatedAt   DateTime  @updatedAt
+}
